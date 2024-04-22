@@ -21,17 +21,13 @@ python -m pip install -e .
 # python streamlit app as service optional button and stats display for pi
 mkdir -p tmp
 
-sudo cp  scripts/services/button.service tmp/stats.service
-sudo cp scripts/services/button.service tmp/button.service
 sudo cp scripts/services/app.service tmp/app.service
-
-sed -i "s|{{HOME}}|$HOME|g" tmp/stats.service
-sed -i "s|{{HOME}}|$HOME|g" tmp/button.service
 sed -i "s|{{HOME}}|$HOME|g" tmp/app.service
-
-sudo cp  tmp/button.service /etc/systemd/system/stats.service
-sudo cp tmp/button.service /etc/systemd/system/button.service
 sudo cp tmp/app.service /etc/systemd/system/app.service
+
+sudo systemctl daemon-reload
+sudo systemctl enable app.service
+# sudo systemctl start app.service
 
 # # app webserver
 sudo cp scripts/nginx/app /etc/nginx/sites-available
