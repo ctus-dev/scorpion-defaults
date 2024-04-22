@@ -44,6 +44,7 @@ python -m pip install -e .
 # python streamlit app as service optional button and stats display for pi
 mkdir -p tmp
 
+sudo chmod +x scripts/services/app.sh
 sudo cp scripts/services/app.service tmp/app.service
 sed -i "s|{{HOME}}|$HOME|g" tmp/app.service
 sudo cp scripts/services/app.sh tmp/app.sh
