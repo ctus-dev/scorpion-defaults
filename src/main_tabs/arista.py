@@ -58,12 +58,14 @@ def display_interface_toggles(interface_status_dict):
                 is_disabled = status != "disabled"
                 if interface_name not in st.session_state:
                     st.session_state[interface_name] = is_disabled
+
                 st.toggle(
                     f"Status: {status}",
                     value=st.session_state[interface_name],
                     key=interface_name,
                     on_change=handle_toggle_change,
                     args=(interface_name,),
+                    disabled=True if status == "connected" else False,
                 )
 
 
